@@ -1,12 +1,7 @@
-
+// This file should be renamed to components/Player.js
 import React from 'react';
-import type { PlayerState } from '../types';
 
-interface PlayerProps {
-  player: PlayerState;
-}
-
-export const Player: React.FC<PlayerProps> = ({ player }) => {
+export const Player = ({ player }) => {
   return (
     <div
       className="absolute bg-white"

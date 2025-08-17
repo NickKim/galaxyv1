@@ -1,13 +1,8 @@
-
+// This file should be renamed to components/Bullet.js
 import React from 'react';
-import type { BulletState } from '../types';
-import { BULLET_WIDTH, BULLET_HEIGHT } from '../constants';
+import { BULLET_WIDTH, BULLET_HEIGHT } from '../constants.js';
 
-interface BulletProps {
-  bullet: BulletState;
-}
-
-export const Bullet: React.FC<BulletProps> = ({ bullet }) => {
+export const Bullet = ({ bullet }) => {
   return (
     <div
       className="absolute bg-white rounded"

@@ -1,11 +1,11 @@
-
+// This file should be renamed to App.js
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Player } from './components/Player';
-import { Enemy } from './components/Enemy';
-import { Bullet } from './components/Bullet';
-import { StartScreen } from './components/StartScreen';
-import { GameOverScreen } from './components/GameOverScreen';
-import { GameState, type PlayerState, type EnemyState, type BulletState } from './types';
+import { Player } from './components/Player.js';
+import { Enemy } from './components/Enemy.js';
+import { Bullet } from './components/Bullet.js';
+import { StartScreen } from './components/StartScreen.js';
+import { GameOverScreen } from './components/GameOverScreen.js';
+import { GameState } from './types.js';
 import { 
   GAME_WIDTH, 
   GAME_HEIGHT, 
@@ -19,18 +19,18 @@ import {
   ENEMY_SPAWN_INTERVAL,
   BULLET_WIDTH,
   BULLET_HEIGHT
-} from './constants';
+} from './constants.js';
 
-const App: React.FC = () => {
-  const [gameState, setGameState] = useState<GameState>(GameState.Start);
-  const [player, setPlayer] = useState<PlayerState>({ x: GAME_WIDTH / 2 - PLAYER_WIDTH / 2, y: GAME_HEIGHT - PLAYER_HEIGHT - 20 });
-  const [enemies, setEnemies] = useState<EnemyState[]>([]);
-  const [bullets, setBullets] = useState<BulletState[]>([]);
+const App = () => {
+  const [gameState, setGameState] = useState(GameState.Start);
+  const [player, setPlayer] = useState({ x: GAME_WIDTH / 2 - PLAYER_WIDTH / 2, y: GAME_HEIGHT - PLAYER_HEIGHT - 20 });
+  const [enemies, setEnemies] = useState([]);
+  const [bullets, setBullets] = useState([]);
   const [score, setScore] = useState(0);
 
-  const keysPressed = useRef<Set<string>>(new Set());
-  const gameLoopRef = useRef<number | null>(null);
-  const enemySpawnTimerRef = useRef<number | null>(null);
+  const keysPressed = useRef(new Set());
+  const gameLoopRef = useRef(null);
+  const enemySpawnTimerRef = useRef(null);
 
   // Use a ref to store the latest state for the game loop to prevent stale closures.
   const latestState = useRef({ player, enemies, bullets, score, gameState });
@@ -64,7 +64,7 @@ const App: React.FC = () => {
     setBullets(prev => [...prev, { id: Date.now(), x: latestState.current.player.x + PLAYER_WIDTH / 2 - BULLET_WIDTH / 2, y: latestState.current.player.y }]);
   }, []);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+  const handleKeyDown = useCallback((e) => {
     keysPressed.current.add(e.key);
     // Use the ref to check the game state to prevent shooting on start/game over screens
     if (e.key === ' ' && latestState.current.gameState === GameState.Playing) {
@@ -75,7 +75,7 @@ const App: React.FC = () => {
     }
   }, [shoot]);
 
-  const handleKeyUp = useCallback((e: KeyboardEvent) => {
+  const handleKeyUp = useCallback((e) => {
     keysPressed.current.delete(e.key);
   }, []);
 
@@ -96,7 +96,7 @@ const App: React.FC = () => {
     let newPlayerX = player.x;
     if (keysPressed.current.has('ArrowLeft')) newPlayerX -= PLAYER_SPEED;
     if (keysPressed.current.has('ArrowRight')) newPlayerX += PLAYER_SPEED;
-    const newPlayer: PlayerState = { ...player, x: Math.max(0, Math.min(GAME_WIDTH - PLAYER_WIDTH, newPlayerX)) };
+    const newPlayer = { ...player, x: Math.max(0, Math.min(GAME_WIDTH - PLAYER_WIDTH, newPlayerX)) };
     
     // 2. Calculate new bullet positions
     const movedBullets = bullets.map(b => ({ ...b, y: b.y - BULLET_SPEED })).filter(b => b.y > -BULLET_HEIGHT);

@@ -1,10 +1,5 @@
-
+// This file should be renamed to components/Enemy.js
 import React from 'react';
-import type { EnemyState } from '../types';
-
-interface EnemyProps {
-  enemy: EnemyState;
-}
 
 const PIXEL_SIZE = 5; // Size of each "pixel" in the UFO
 const UFO_MAP = [
@@ -15,8 +10,8 @@ const UFO_MAP = [
 ];
 
 // Pre-calculate shadow to avoid re-calculating on every render
-const boxShadows: string[] = [];
-let firstPixel: { x: number; y: number } | null = null;
+const boxShadows = [];
+let firstPixel = null;
 
 // Find the first pixel to use as the base element, so we can offset shadows correctly
 for (let y = 0; y < UFO_MAP.length; y++) {
@@ -33,9 +28,9 @@ if (firstPixel) {
   UFO_MAP.forEach((row, y) => {
       row.split('').forEach((char, x) => {
           // Skip the first pixel since it will be the element itself
-          if (char === '#' && !(x === firstPixel!.x && y === firstPixel!.y)) {
-              const relX = (x - firstPixel!.x) * PIXEL_SIZE;
-              const relY = (y - firstPixel!.y) * PIXEL_SIZE;
+          if (char === '#' && !(x === firstPixel.x && y === firstPixel.y)) {
+              const relX = (x - firstPixel.x) * PIXEL_SIZE;
+              const relY = (y - firstPixel.y) * PIXEL_SIZE;
               boxShadows.push(`${relX}px ${relY}px 0 0 white`);
           }
       });
@@ -43,7 +38,7 @@ if (firstPixel) {
 }
 const finalBoxShadow = boxShadows.join(', ');
 
-export const Enemy: React.FC<EnemyProps> = ({ enemy }) => {
+export const Enemy = ({ enemy }) => {
   if (!firstPixel) return null; // Should not happen with the current map
 
   return (

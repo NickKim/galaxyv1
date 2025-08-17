@@ -1,19 +1,6 @@
-
-export interface Position {
-  x: number;
-  y: number;
-}
-
-export interface GameObject extends Position {
-  id: number;
-}
-
-export type PlayerState = Position;
-export type EnemyState = GameObject;
-export type BulletState = GameObject;
-
-export enum GameState {
-  Start,
-  Playing,
-  GameOver,
-}
+// This file should be renamed to types.js
+export const GameState = {
+  Start: 0,
+  Playing: 1,
+  GameOver: 2,
+};

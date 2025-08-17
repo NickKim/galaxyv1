@@ -1,4 +1,4 @@
-
+// This file should be renamed to constants.js
 export const GAME_WIDTH = 600;
 export const GAME_HEIGHT = 800;
 

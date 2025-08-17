@@ -1,11 +1,7 @@
-
+// This file should be renamed to components/StartScreen.js
 import React from 'react';
 
-interface StartScreenProps {
-  onStart: () => void;
-}
-
-export const StartScreen: React.FC<StartScreenProps> = ({ onStart }) => {
+export const StartScreen = ({ onStart }) => {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-70">
       <h1 className="text-6xl font-bold font-mono text-white animate-pulse">GALAXY SHOOTER</h1>
