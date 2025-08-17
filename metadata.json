@@ -1,0 +1,5 @@
+{
+  "name": "Galaxy Shooter",
+  "description": "A simple, retro-style space shooter game reminiscent of classic arcade games. Control your ship, shoot down descending enemies, and aim for a high score in this minimalist web-based game.",
+  "requestFramePermissions": []
+}
